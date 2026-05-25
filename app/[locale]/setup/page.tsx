@@ -6,7 +6,10 @@ import {
   getHomeWorkspaceByUserId,
   getWorkspacesByUserId
 } from "@/db/workspaces"
-import { fetchHostedModels, fetchOpenRouterModels } from "@/lib/models/fetch-models"
+import {
+  fetchHostedModels,
+  fetchOpenRouterModels
+} from "@/lib/models/fetch-models"
 import { supabase } from "@/lib/supabase/browser-client"
 import { TablesUpdate } from "@/supabase/types"
 import { useRouter } from "next/navigation"

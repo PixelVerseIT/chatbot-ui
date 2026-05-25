@@ -182,9 +182,7 @@ export const Message: FC<MessageProps> = ({
 
   return (
     <div
-      className={cn(
-        "flex w-full justify-center",
-      )}
+      className={cn("flex w-full justify-center")}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onKeyDown={handleKeyDown}
@@ -303,9 +301,9 @@ export const Message: FC<MessageProps> = ({
               maxRows={20}
             />
           ) : (
-            <MessageMarkdown 
-              content={message.content} 
-              role={message.role} 
+            <MessageMarkdown
+              content={message.content}
+              role={message.role}
               isGenerating={isGenerating}
               isLastMessage={isLast}
             />

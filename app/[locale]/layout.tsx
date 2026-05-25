@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner"
 import { GlobalState } from "@/components/utility/global-state"
+import { SunsetOverlay } from "@/components/utility/sunset-overlay"
 import { Providers } from "@/components/utility/providers"
 import TranslationsProvider from "@/components/utility/translations-provider"
 import initTranslations from "@/lib/i18n"
@@ -16,7 +17,8 @@ const inter = Inter({ subsets: ["latin"] })
 const APP_NAME = "PixelVerseAI Chats"
 const APP_DEFAULT_TITLE = "PixelVerseAI Chats"
 const APP_TITLE_TEMPLATE = "%s - PixelVerseAI Chats"
-const APP_DESCRIPTION = "PixelVerseAI Chats - The all in one chatbot app with GPT 4, Claude 3.5 Sonnet, Gemini 1.5 and more starting at $8/month"
+const APP_DESCRIPTION =
+  "PixelVerseAI Chats - The all in one chatbot app with GPT 4, Claude 3.5 Sonnet, Gemini 1.5 and more starting at $8/month"
 
 interface RootLayoutProps {
   children: ReactNode
@@ -100,6 +102,7 @@ export default async function RootLayout({
             <div className="bg-background text-foreground flex h-dvh flex-col items-center overflow-x-auto">
               {session ? <GlobalState>{children}</GlobalState> : children}
             </div>
+            <SunsetOverlay />
           </TranslationsProvider>
         </Providers>
       </body>

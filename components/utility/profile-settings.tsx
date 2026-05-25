@@ -458,7 +458,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
             </TabsContent>
 
             {/* <TabsContent className="mt-4 space-y-4" value="keys"> */}
-              {/* <div className="mt-5 space-y-2">
+            {/* <div className="mt-5 space-y-2">
                 <Label className="flex items-center">
                   {useAzureOpenai
                     ? envKeyMap["azure"]
@@ -653,7 +653,7 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                 )}
               </div> */}
 
-              {/* <div className="space-y-1">
+            {/* <div className="space-y-1">
                 {envKeyMap["openai"] ? (
                   <Label>You currently have access to OpenAI Models</Label>
                 ) : (
@@ -766,15 +766,33 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
               </div>
             </TabsContent> */}
 
-
             <TabsContent className="mt-4 space-y-4" value="account">
               <div className="space-y-4">
                 <div className="flex flex-col space-y-1">
-                    <div className="flex items-center space-x-2 mb-4">
-                    <Label>Your current plan is: PixelVerseAI <span className="bg-blue-500 text-white rounded-full px-2 py-1">{profile?.tier || "TIER UNAVALIABLE"}</span></Label>
+                  <div className="mb-4 flex items-center space-x-2">
+                    <Label>
+                      Your current plan is: PixelVerseAI{" "}
+                      <span className="rounded-full bg-blue-500 px-2 py-1 text-white">
+                        {profile?.tier || "TIER UNAVALIABLE"}
+                      </span>
+                    </Label>
                   </div>
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={() => window.open('https://billing.stripe.com/p/login/eVaaIGaJX5ox5BC7ss', '_blank')}>Manage Subscription</button>
-                  <Label className="text-sm text-gray-500 text-center"><a href="https://ai.pixelverse.tech/assets/policies/PXVSITD809.pdf">PixelVerse Chats Policy</a></Label>
+                  <button
+                    className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    onClick={() =>
+                      window.open(
+                        "https://billing.stripe.com/p/login/eVaaIGaJX5ox5BC7ss",
+                        "_blank"
+                      )
+                    }
+                  >
+                    Manage Subscription
+                  </button>
+                  <Label className="text-center text-sm text-gray-500">
+                    <a href="https://ai.pixelverse.tech/assets/policies/PXVSITD809.pdf">
+                      PixelVerse Chats Policy
+                    </a>
+                  </Label>
                 </div>
               </div>
             </TabsContent>
@@ -783,28 +801,35 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
               <div className="mt-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <Label>Usage Information</Label>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
+                  <Button
+                    size="sm"
+                    variant="outline"
                     onClick={fetchUsage}
                     disabled={loading}
                   >
                     {loading ? (
-                      <IconLoader2 className="animate-spin mr-2" size={18} />
+                      <IconLoader2 className="mr-2 animate-spin" size={18} />
                     ) : (
                       "Refresh"
                     )}
                   </Button>
                 </div>
 
-                <div className="mb-4 p-4 bg-yellow-100 dark:bg-yellow-900 rounded-lg">
+                <div className="mb-4 rounded-lg bg-yellow-100 p-4 dark:bg-yellow-900">
                   <div className="space-y-2">
                     <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                      Usage resets daily. You&apos;ll be notified here when approaching limits. These limits are in place to prevent spam and ensure fair usage for all users.
+                      Usage resets daily. You&apos;ll be notified here when
+                      approaching limits. These limits are in place to prevent
+                      spam and ensure fair usage for all users.
                     </p>
-                    <button 
-                       onClick={() => window.open('https://pixelverse.fillout.com/t/uihmbUBUmXus', '_blank')}
-                       className="mt-2 px-4 py-2 text-sm bg-yellow-200 dark:bg-yellow-800 text-yellow-800 dark:text-yellow-200 rounded hover:opacity-80"
+                    <button
+                      onClick={() =>
+                        window.open(
+                          "https://pixelverse.fillout.com/t/uihmbUBUmXus",
+                          "_blank"
+                        )
+                      }
+                      className="mt-2 rounded bg-yellow-200 px-4 py-2 text-sm text-yellow-800 hover:opacity-80 dark:bg-yellow-800 dark:text-yellow-200"
                     >
                       Give Feedback
                     </button>
@@ -818,32 +843,38 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
                 ) : (
                   <div className="space-y-4">
                     {Object.entries(tierLimits || {}).map(([model, limit]) => {
-                      if (model === "messages_per_day") return null;
-                      const used = (usage || {})[model] || 0;
-                      const usagePercentage = limit === -1 ? 0 : (used / limit) * 100;
+                      if (model === "messages_per_day") return null
+                      const used = (usage || {})[model] || 0
+                      const usagePercentage =
+                        limit === -1 ? 0 : (used / limit) * 100
 
                       if (usagePercentage >= 75) {
                         return (
-                          <div key={model} className={cn(
-                            "p-4 rounded-lg",
-                            usagePercentage >= 100 ? "bg-red-100 dark:bg-red-900" : "bg-yellow-100 dark:bg-yellow-900"
-                          )}>
-                            <div className="font-medium mb-1">
-                              {model}
-                            </div>
+                          <div
+                            key={model}
+                            className={cn(
+                              "rounded-lg p-4",
+                              usagePercentage >= 100
+                                ? "bg-red-100 dark:bg-red-900"
+                                : "bg-yellow-100 dark:bg-yellow-900"
+                            )}
+                          >
+                            <div className="mb-1 font-medium">{model}</div>
                             {usagePercentage >= 100 ? (
                               <p className="text-sm text-red-600 dark:text-red-200">
-                                Daily limit reached. Limit resets at midnight UTC.
+                                Daily limit reached. Limit resets at midnight
+                                UTC.
                               </p>
                             ) : (
                               <p className="text-sm text-yellow-600 dark:text-yellow-200">
-                                Warning: Approaching daily limit ({Math.round(usagePercentage)}% used)
+                                Warning: Approaching daily limit (
+                                {Math.round(usagePercentage)}% used)
                               </p>
                             )}
                           </div>
-                        );
+                        )
                       }
-                      return null;
+                      return null
                     })}
                   </div>
                 )}
@@ -946,9 +977,6 @@ export const ProfileSettings: FC<ProfileSettingsProps> = ({}) => {
     )}
   </div>
 </TabsContent> */}
-
-
-
           </Tabs>
         </div>
 

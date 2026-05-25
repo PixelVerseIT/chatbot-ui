@@ -1,6 +1,11 @@
 import { ChatbotUIContext } from "@/context/context"
 import { cn } from "@/lib/utils"
-import { IconCode, IconSchool, IconPencil, IconSparkles } from "@tabler/icons-react"
+import {
+  IconCode,
+  IconSchool,
+  IconPencil,
+  IconSparkles
+} from "@tabler/icons-react"
 import { useContext, useState } from "react"
 import { Button } from "../ui/button"
 import { useChatHandler } from "./chat-hooks/use-chat-handler"
@@ -73,12 +78,14 @@ export const ChatSuggestions = () => {
   if (chatMessages.length > 0) return null
 
   const displayName = profile?.display_name || ""
-  const greeting = displayName ? `How can I help you, ${displayName}?` : "How can I help you today?"
+  const greeting = displayName
+    ? `How can I help you, ${displayName}?`
+    : "How can I help you today?"
 
   return (
-    <div className="flex flex-col items-start w-full max-w-3xl">
+    <div className="flex w-full max-w-3xl flex-col items-start">
       <h1 className="mb-8 text-4xl font-bold">{greeting}</h1>
-      
+
       <div className="mb-8 flex space-x-2">
         {categories.map(category => (
           <Button
@@ -101,7 +108,7 @@ export const ChatSuggestions = () => {
               key={index}
               variant="ghost"
               className={cn(
-                "justify-start border border-transparent px-4 py-6 text-left hover:border-primary/20 hover:bg-primary/5"
+                "hover:border-primary/20 hover:bg-primary/5 justify-start border border-transparent px-4 py-6 text-left"
               )}
               onClick={() => handleQuestionClick(question)}
             >

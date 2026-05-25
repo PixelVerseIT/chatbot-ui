@@ -4,7 +4,7 @@ import { ModelIcon } from "./model-icon"
 
 interface ModelOptionProps {
   model: LLM
-  onSelect: () => void 
+  onSelect: () => void
 }
 
 export const ModelOption: FC<ModelOptionProps> = ({ model, onSelect }) => {
@@ -18,14 +18,16 @@ export const ModelOption: FC<ModelOptionProps> = ({ model, onSelect }) => {
 
         <div className="flex items-center space-x-2">
           <div className="text-sm font-semibold">{model.modelName}</div>
-          
+
           {model.badge?.map((badge, index) => (
-            <span 
+            <span
               key={index}
-              className={`ml-1 px-1.5 py-0.5 text-xs font-medium rounded ${
-                badge === "NEW" ? "bg-green-500/20 text-green-500" :
-                badge === "PLUS" ? "bg-blue-500/20 text-blue-500" :
-                "bg-yellow-500/20 text-yellow-500"
+              className={`ml-1 rounded px-1.5 py-0.5 text-xs font-medium ${
+                badge === "NEW"
+                  ? "bg-green-500/20 text-green-500"
+                  : badge === "PLUS"
+                    ? "bg-blue-500/20 text-blue-500"
+                    : "bg-yellow-500/20 text-yellow-500"
               }`}
             >
               {badge}

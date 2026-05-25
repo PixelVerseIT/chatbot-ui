@@ -55,23 +55,30 @@ export async function POST(request: NextRequest) {
     )
 
     // Calculate total input tokens
-    const totalInputTokens = ANTHROPIC_FORMATTED_MESSAGES.reduce((acc: number, message: any) => {
-      return acc + message.content.reduce((contentAcc: number, content: any) => {
-        if (content.type === "text") {
-          // Rough estimate: 1 token per 4 characters
-          return contentAcc + Math.ceil(content.text.length / 4)
-        }
-        // Add a fixed number for images (e.g., 100 tokens)
-        return contentAcc + (content.type === "image" ? 100 : 0)
-      }, 0)
-    }, 0)
+    const totalInputTokens = ANTHROPIC_FORMATTED_MESSAGES.reduce(
+      (acc: number, message: any) => {
+        return (
+          acc +
+          message.content.reduce((contentAcc: number, content: any) => {
+            if (content.type === "text") {
+              // Rough estimate: 1 token per 4 characters
+              return contentAcc + Math.ceil(content.text.length / 4)
+            }
+            // Add a fixed number for images (e.g., 100 tokens)
+            return contentAcc + (content.type === "image" ? 100 : 0)
+          }, 0)
+        )
+      },
+      0
+    )
 
     // Add system message tokens
     const systemMessageTokens = Math.ceil(messages[0].content.length / 4)
     const totalTokens = totalInputTokens + systemMessageTokens
 
     // Check if total tokens exceed the limit
-    const maxContextTokens = CHAT_SETTING_LIMITS[chatSettings.model].MAX_CONTEXT_LENGTH
+    const maxContextTokens =
+      CHAT_SETTING_LIMITS[chatSettings.model].MAX_CONTEXT_LENGTH
     if (totalTokens > maxContextTokens) {
       return new NextResponse(
         JSON.stringify({
@@ -83,20 +90,25 @@ export async function POST(request: NextRequest) {
 
     const anthropic = new Anthropic({
       apiKey: profile.anthropic_api_key || "",
-      baseURL: "https://gateway.ai.cloudflare.com/v1/77a0b1436313aeb84549202bdd962b63/pixelverseaisystems/anthropic"
+      baseURL:
+        "https://gateway.ai.cloudflare.com/v1/77a0b1436313aeb84549202bdd962b63/pixelverseaisystems/anthropic"
     })
 
     try {
       const response = await anthropic.messages.create({
-        model: chatSettings.model === 'claude-3-opus-20240229' ? 'claude-3-5-haiku-latest' :
-               chatSettings.model === 'claude-3-5-sonnet-20240620' ? 'claude-3-5-haiku-latest' : chatSettings.model,
+        model:
+          chatSettings.model === "claude-3-opus-20240229"
+            ? "claude-3-5-haiku-latest"
+            : chatSettings.model === "claude-3-5-sonnet-20240620"
+              ? "claude-3-5-haiku-latest"
+              : chatSettings.model,
         messages: ANTHROPIC_FORMATTED_MESSAGES,
         temperature: chatSettings.temperature,
         system: messages[0].content,
-        max_tokens: CHAT_SETTING_LIMITS[chatSettings.model].MAX_TOKEN_OUTPUT_LENGTH,
+        max_tokens:
+          CHAT_SETTING_LIMITS[chatSettings.model].MAX_TOKEN_OUTPUT_LENGTH,
         stream: true
       })
-
 
       try {
         const stream = AnthropicStream(response)
@@ -105,7 +117,8 @@ export async function POST(request: NextRequest) {
         console.error("Error parsing Anthropic API response:", error)
         return new NextResponse(
           JSON.stringify({
-            message: "An error occurred while parsing the Anthropic API response"
+            message:
+              "An error occurred while parsing the Anthropic API response"
           }),
           { status: 500 }
         )
@@ -124,9 +137,11 @@ export async function POST(request: NextRequest) {
     const errorCode = error.status || 500
 
     if (errorMessage.toLowerCase().includes("api key not found")) {
-      errorMessage = "Anthropic API Key not found. Please set it in your profile settings."
+      errorMessage =
+        "Anthropic API Key not found. Please set it in your profile settings."
     } else if (errorCode === 401) {
-      errorMessage = "Anthropic API Key is incorrect. Please fix it in your profile settings."
+      errorMessage =
+        "Anthropic API Key is incorrect. Please fix it in your profile settings."
     }
 
     return new NextResponse(JSON.stringify({ message: errorMessage }), {

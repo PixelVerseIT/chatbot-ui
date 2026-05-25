@@ -14,7 +14,6 @@ const GEMINI_1_5_FLASH: LLM = {
   imageInput: true
 }
 
-
 // Gemini Pro 1.5 (UPDATED 12/22/23)
 const GEMINI_1_5_PRO: LLM = {
   modelId: "gemini-1.5-pro-latest",
@@ -45,7 +44,7 @@ const GEMINI_2_FLASH_LITE: LLM = {
   imageInput: true
 }
 
-// Gemini 2.0 Flash Thinking Exp 
+// Gemini 2.0 Flash Thinking Exp
 const GEMINI_2_FLASH_THINK_EXP: LLM = {
   modelId: "gemini-2.0-flash-thinking-exp-01-21",
   modelName: "Gemini 2 Flash Thinking",
@@ -66,7 +65,6 @@ const GEMINI_2_5_PRO: LLM = {
   imageInput: true,
   badge: ["BETA", "NEW"]
 }
-
 
 export const GOOGLE_LLM_LIST: LLM[] = [
   GEMINI_1_5_FLASH,

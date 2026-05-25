@@ -11,18 +11,21 @@ interface BrandProps {
   hideOnChatPage?: boolean
 }
 
-export const Brand: FC<BrandProps> = ({ 
-  theme = "dark", 
+export const Brand: FC<BrandProps> = ({
+  theme = "dark",
   showPersonalGreeting = false,
   hideOnChatPage = false
 }) => {
   const { profile, chatMessages } = useContext(ChatbotUIContext)
-  
+
   // If we're on the chat page with no messages and hideOnChatPage is true, don't render
-  if (hideOnChatPage && chatMessages.length === 0) return null;
-  
+  if (hideOnChatPage && chatMessages.length === 0) return null
+
   const displayName = profile?.display_name || ""
-  const greeting = showPersonalGreeting && displayName ? `Hello, ${displayName}` : "PixelVerseAI Chats"
+  const greeting =
+    showPersonalGreeting && displayName
+      ? `Hello, ${displayName}`
+      : "PixelVerseAI Chats"
 
   return (
     <Link

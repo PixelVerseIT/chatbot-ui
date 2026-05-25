@@ -35,7 +35,7 @@ export const WaitingAnimation: FC = () => {
   return (
     <div className="flex items-center space-x-2">
       <IconCircleFilled className="animate-pulse" size={20} />
-      <div 
+      <div
         className={cn(
           "transition-opacity duration-500",
           visible ? "opacity-100" : "opacity-30"

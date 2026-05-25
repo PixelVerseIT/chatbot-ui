@@ -27,10 +27,10 @@ export default function ChatPage() {
       {chatMessages.length === 0 ? (
         <div className="relative flex h-full flex-col items-center justify-center">
           <div className="top-50% left-50% -translate-x-50% -translate-y-50% absolute mb-20">
-            <Brand 
-              theme={theme === "dark" ? "dark" : "light"} 
-              showPersonalGreeting={true} 
-              hideOnChatPage={true} 
+            <Brand
+              theme={theme === "dark" ? "dark" : "light"}
+              showPersonalGreeting={true}
+              hideOnChatPage={true}
             />
           </div>
 
@@ -42,7 +42,7 @@ export default function ChatPage() {
             <ChatSettings />
           </div>
 
-          <div className="flex grow flex-col items-start justify-center w-full max-w-3xl px-4">
+          <div className="flex w-full max-w-3xl grow flex-col items-start justify-center px-4">
             <ChatSuggestions />
           </div>
 

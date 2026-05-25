@@ -192,12 +192,12 @@ export const useChatHandler = () => {
   }
 
   const handleSendMessage = async (
-    messageContent: string, 
+    messageContent: string,
     chatMessages: ChatMessage[],
     isRegeneration: boolean
   ) => {
     const startingInput = messageContent
-  
+
     try {
       // Keep rate limit check
       if (!isRegeneration && profile) {
@@ -206,12 +206,12 @@ export const useChatHandler = () => {
           profile.tier || "FREE",
           chatSettings?.model || ""
         )
-  
+
         if (!allowed) {
           toast.error(error)
           return
         }
-      }  
+      }
 
       setUserInput("")
       setIsGenerating(true)
@@ -342,7 +342,7 @@ export const useChatHandler = () => {
             setChatMessages,
             setToolInUse
           )
-          
+
           // Add usage tracking
           if (profile && chatSettings?.model) {
             await incrementModelUsage(profile.user_id, chatSettings.model)
@@ -362,7 +362,7 @@ export const useChatHandler = () => {
             setChatMessages,
             setToolInUse
           )
-          
+
           // Add usage tracking
           if (profile && chatSettings?.model) {
             await incrementModelUsage(profile.user_id, chatSettings.model)
@@ -416,7 +416,7 @@ export const useChatHandler = () => {
       setFirstTokenReceived(false)
     } catch (error) {
       setIsGenerating(false)
-      setFirstTokenReceived(false) 
+      setFirstTokenReceived(false)
       setUserInput(startingInput)
       toast.error("Error sending message: " + (error as Error).message)
     }
@@ -439,10 +439,10 @@ export const useChatHandler = () => {
     )
 
     setChatMessages(filteredMessages)
-  
+
     // Track usage for edited/regenerated messages
     await incrementModelUsage(profile.user_id, chatSettings.model)
-  
+
     // Send edited message (will track usage in handleSendMessage)
     await handleSendMessage(editedContent, filteredMessages, false)
   }

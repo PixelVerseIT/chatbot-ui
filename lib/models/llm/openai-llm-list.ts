@@ -2,7 +2,6 @@ import { LLM } from "@/types"
 
 const OPENAI_PLATORM_LINK = "https://platform.openai.com/docs/overview"
 
-
 // OpenAI o4 Models
 const o4Mini: LLM = {
   modelId: "o4-mini-2025-04-16",
@@ -14,7 +13,6 @@ const o4Mini: LLM = {
   badge: ["NEW", "PLUS"]
 }
 
-
 // OpenAI o3 Models
 const o3Mini: LLM = {
   modelId: "o3-mini",
@@ -22,7 +20,7 @@ const o3Mini: LLM = {
   provider: "openai",
   hostedId: "o3-mini",
   platformLink: OPENAI_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 // OpenAI o1 Models
@@ -45,7 +43,6 @@ const o1preview: LLM = {
   imageInput: false,
   badge: ["PLUS"]
 }
-
 
 // OpenAI Models (UPDATED 1/25/24) -----------------------------
 const GPT4_1: LLM = {
@@ -78,16 +75,14 @@ const GPT4_1_nano: LLM = {
   badge: ["NEW"]
 }
 
-
 const GPT4oMini: LLM = {
   modelId: "gpt-4o-mini",
   modelName: "GPT-4o Mini",
   provider: "openai",
   hostedId: "gpt-4o-mini",
   platformLink: OPENAI_PLATORM_LINK,
-  imageInput: true,
+  imageInput: true
 }
-
 
 const GPT4o: LLM = {
   modelId: "gpt-4o",
@@ -95,7 +90,7 @@ const GPT4o: LLM = {
   provider: "openai",
   hostedId: "gpt-4o",
   platformLink: OPENAI_PLATORM_LINK,
-  imageInput: true,
+  imageInput: true
 }
 
 // GPT-4 Turbo (UPDATED 1/25/24)

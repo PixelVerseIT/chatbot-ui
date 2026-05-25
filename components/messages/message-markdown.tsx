@@ -8,32 +8,32 @@ import { cn } from "@/lib/utils"
 import "katex/dist/katex.min.css"
 
 interface MessageMarkdownProps {
-  content: string;
-  role?: string;
-  isGenerating?: boolean;
-  isLastMessage?: boolean;
+  content: string
+  role?: string
+  isGenerating?: boolean
+  isLastMessage?: boolean
 }
 
-export const MessageMarkdown: FC<MessageMarkdownProps> = ({ 
-  content, 
-  role, 
+export const MessageMarkdown: FC<MessageMarkdownProps> = ({
+  content,
+  role,
   isGenerating = false,
-  isLastMessage = false 
+  isLastMessage = false
 }) => {
   // Only animate when this is an assistant message that's currently being generated
-  const shouldAnimate = role === "assistant" && isGenerating && isLastMessage;
-  
+  const shouldAnimate = role === "assistant" && isGenerating && isLastMessage
+
   // Process content to ensure LaTeX renders properly
   // This ensures all LaTeX delimiters are properly handled
   const processedContent = content
     // Replace display math with KaTeX-compatible format
-    .replace(/\\\[\s*([\s\S]*?)\s*\\\]/g, '$$\n$1\n$$')
+    .replace(/\\\[\s*([\s\S]*?)\s*\\\]/g, "$$\n$1\n$$")
     // Replace inline math with KaTeX-compatible format
-    .replace(/\\\(\s*([\s\S]*?)\s*\\\)/g, '$$$1$$');
-  
+    .replace(/\\\(\s*([\s\S]*?)\s*\\\)/g, "$$$1$$")
+
   // Use CSS animations instead of React state for smoother transitions
   return (
-    <div 
+    <div
       className={cn(
         // Always make content immediately visible for normal messages
         !shouldAnimate ? "opacity-100" : "",
@@ -60,7 +60,9 @@ export const MessageMarkdown: FC<MessageMarkdownProps> = ({
               : firstChild
 
             if (firstChildAsString === "▍") {
-              return <span className="mt-1 animate-pulse cursor-default">▍</span>
+              return (
+                <span className="mt-1 animate-pulse cursor-default">▍</span>
+              )
             }
 
             if (typeof firstChildAsString === "string") {

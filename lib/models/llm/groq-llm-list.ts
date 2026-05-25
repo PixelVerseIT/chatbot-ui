@@ -2,7 +2,6 @@ import { LLM } from "@/types"
 
 const GROQ_PLATORM_LINK = "https://groq.com/"
 
-
 // DeepSeek Models
 const DeepSeek_R1: LLM = {
   modelId: "deepseek-r1-distill-llama-70b",
@@ -30,7 +29,7 @@ const LLaMA3_70B: LLM = {
   provider: "groq",
   hostedId: "llama3-70b-8192",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 // Llama 3.1 models
@@ -40,7 +39,7 @@ const LLaMA31_8B: LLM = {
   provider: "groq",
   hostedId: "llama-3.1-8b-instant",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 const LLaMA31_70B: LLM = {
@@ -49,7 +48,7 @@ const LLaMA31_70B: LLM = {
   provider: "groq",
   hostedId: "llama-3.1-70b-versatile",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 // Llama 3.2 models
@@ -59,7 +58,7 @@ const LLaMA32_3B: LLM = {
   provider: "groq",
   hostedId: "llama-3.2-3b-preview",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 const LLaMA32_11B: LLM = {
@@ -68,7 +67,7 @@ const LLaMA32_11B: LLM = {
   provider: "groq",
   hostedId: "llama-3.2-11b-vision-preview",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 const LLaMA32_90B: LLM = {
@@ -77,7 +76,7 @@ const LLaMA32_90B: LLM = {
   provider: "groq",
   hostedId: "llama-3.2-90b-vision-preview",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: true,
+  imageInput: true
 }
 
 const LLaMA33_70B: LLM = {
@@ -107,7 +106,7 @@ const GEMMA_7B_IT: LLM = {
   provider: "groq",
   hostedId: "gemma-7b-it",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 const GEMMA2_7B_IT: LLM = {
@@ -116,7 +115,7 @@ const GEMMA2_7B_IT: LLM = {
   provider: "groq",
   hostedId: "gemma2-9b-it",
   platformLink: GROQ_PLATORM_LINK,
-  imageInput: false,
+  imageInput: false
 }
 
 export const GROQ_LLM_LIST: LLM[] = [
